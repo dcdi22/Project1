@@ -20,7 +20,7 @@ $(function () {
             var vimeoResults = response.data;
         })
         var lastfmAPIKey = "628ffbed5ecc1259d740e1b19182a0bb";
-        var lastfmQueryURL = "http://ws.audioscrobbler.com/2.0/?method=" + artist + ".getinfo&" + artist + "=Cher&api_key=" + lastfmAPIKey + "&format=json"
+        var lastfmQueryURL = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + artist + "&api_key=" + lastfmAPIKey + "&format=json"
 
         $.ajax({
             url: lastfmQueryURL,
@@ -49,6 +49,6 @@ $(function () {
         });
     });
 
-
+ })
 
 })
