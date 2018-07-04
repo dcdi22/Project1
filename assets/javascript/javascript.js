@@ -1,10 +1,10 @@
-var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b'
-var client_secret = '4702fa19b63940e7aefb634fa83392de';
+
 var genres = [];
 var moods = [];
 var randomTracks = [];
 var spotify_access_token;
-
+var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b'
+var client_secret = '4702fa19b63940e7aefb634fa83392de';
 function generateSpotifyAccessToken(cb) {
     $.ajax({
         url: 'https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/api/token',
@@ -63,8 +63,9 @@ $(document.body).on("click", '#submit', function () {
             method: "GET"
         })
         .then(function (response) {
-            var lastfmResults = response.data;
+            var lastfmResults = response.artist;
             console.log(response);
+            $("#artistInfo").html(lastfmResults.bio.summary);
         });
 
 })
