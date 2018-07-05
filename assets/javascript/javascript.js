@@ -87,6 +87,14 @@ $(document.body).on("click", '#submit', function (event) {
     var vimeoQueryURL = `https://api.vimeo.com/videos?query="${artist}"&access_token=${vimeoAccessToken}&per_page=1`;
     // Get rid of this if using catagories &page=1&per_page=15
 
+
+    //       //
+    // Vimeo //
+    //       //
+    var vimeoAccessToken = '275bb5cff8e3ae3639a860dd4c0976cf'
+    var vimeoQueryURL = `https://api.vimeo.com/videos?query="${artist}"&access_token=${vimeoAccessToken}&per_page=1`;
+    // Get rid of this if using catagories &page=1&per_page=15
+
     $.ajax({
         url: vimeoQueryURL,
         method: "GET"
@@ -100,8 +108,6 @@ $(document.body).on("click", '#submit', function (event) {
         console.log(vimeoResults[0].uri.match(/\d+/)[0]);
         console.log($("#backVid"));
         $("#backVid").attr("src", 'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s');
-
-       
     })
 
     //         //
