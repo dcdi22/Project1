@@ -39,18 +39,53 @@ function getArtist(artist, cb) {
     }).then(cb).catch(() => generateSpotifyAccessToken(() => getArtist(artist, cb)));
 }
 
-$(document.body).on("click", '#submit', function () {
-    //event.preventDefault();
+$(document.body).on("click", '#submit', function (event) {
+    event.preventDefault();
     var artist = $("#artistName").val().trim();
     capitalize();
-
+   
+ 
     //                       //
     // Spotify Function Call //
     //                       //
-    getArtist(artist, function (tracks) {
+    function playMusic(tracks) {
         console.log(tracks);
-        console.log(tracks.tracks.href);
-    });
+        console.log(tracks.tracks.items[0].preview_url);
+        var playList = [];
+        var playList_Index = 0;
+        var audioElement = document.createElement("audio");
+        
+        for (var i=0; i < tracks.tracks.items.length; i++) {
+            playList.push(tracks.tracks.items[i].preview_url);
+        }
+        console.log(playList);
+
+
+        //  while (playList_Index < playList.length) {
+            audioElement.setAttribute('src', playList[playList_Index]);
+            // audioElement.setAttribute('id', "track-" + playList_Index);
+            audioElement.play();
+
+            if (playList_Index < playList.length) {
+                audioElement.load();
+                audioElement.play();
+                audioElement.addEventListener('ended', function() {
+                    playList_Index++;
+                    playMusic(tracks);
+                })
+            }
+
+            
+
+    }
+    getArtist(artist, playMusic);
+   
+    //       //
+    // Vimeo //
+    //       //
+    var vimeoAccessToken = '275bb5cff8e3ae3639a860dd4c0976cf'
+    var vimeoQueryURL = `https://api.vimeo.com/videos?query="${artist}"&access_token=${vimeoAccessToken}&per_page=1`;
+    // Get rid of this if using catagories &page=1&per_page=15
 
 
     //       //
@@ -66,10 +101,6 @@ $(document.body).on("click", '#submit', function () {
     }).then(function (response) {
         console.log(response);
 
-        // var video = response.data.filter(e => e.categories.some(x => x.name === 'Music'))[0];
-
-        // $('#backVid').attr('src', 'https://player.vimeo.com/video/' + video.uri.match(/\d+/) + '?autoplay=1&loop=1&muted=1#t=40s');
-
         console.log(response.data.filter(e => e.categories.some(x => x.name === 'Music')));
         console.log(response.data.filter(e => e.categories.some(x => x.name === 'Music'))[0]);
 
@@ -77,13 +108,6 @@ $(document.body).on("click", '#submit', function () {
         console.log(vimeoResults[0].uri.match(/\d+/)[0]);
         console.log($("#backVid"));
         $("#backVid").attr("src", 'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s');
-
-        // var video = response.data.filter(video => video.tags.some(tag => /music/i.test(tag.name)))[0];
-
-        // // console.log(video.uri.match(/\d+/));
-        // // console.log($("#backVid"));
-
-        // $('#backVid').attr('src', 'https://player.vimeo.com/video/' + video.uri.match(/\d+/) + '?autoplay=1&loop=1&muted=1#t=40s')
     })
 
     //         //
