@@ -179,16 +179,34 @@ function addToDataBase() {
 
 var ref = firebase.database().ref("artists");
 
-ref.on("value", function(snapshot) {
- snapshot.forEach(function(childSnapshot) {
-  var childData = childSnapshot.val();
-  var artist = childData.artistName;
-  console.log(childData);
-  console.log(artist);
-  artistArr.push(artist);
-  console.log(artistArr);
- });
+ref.on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+        var childData = childSnapshot.val();
+        var artist = childData.artistName;
+        //console.log(childData);
+        //console.log(artist);
+        artistArr.push(artist);
+        //console.log(artistArr);
+        // return(artistArr);
+        var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+        console.log(randomArtist);
+        // return(randomArtist);
+    });
 });
+
+console.log(artistArr);
+
+$("#random").on("click", function(event) {
+    event.preventDefault();
+
+    randomArtist = artist;
+    //make an everything function????
+
+
+})
+
+// var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+// console.log(randomArtist);
 
 // var ref = new Firebase('https://music-project-1-58914.firebaseio.com');
 // var artistsRef = ref.child("artists");
