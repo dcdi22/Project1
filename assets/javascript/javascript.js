@@ -21,7 +21,6 @@ function generateSpotifyAccessToken(cb) {
     }).catch(err => console.error(err));
 }
 
-
 //         //
 // Spotify //
 //         //
@@ -43,8 +42,8 @@ $(document.body).on("click", '#submit', function (event) {
     event.preventDefault();
     var artist = $("#artistName").val().trim();
     capitalize();
-   
- 
+
+
     //                       //
     // Spotify Function Call //
     //                       //
@@ -54,32 +53,32 @@ $(document.body).on("click", '#submit', function (event) {
         var playList = [];
         var playList_Index = 0;
         var audioElement = document.createElement("audio");
-        
-        for (var i=0; i < tracks.tracks.items.length; i++) {
+
+        for (var i = 0; i < tracks.tracks.items.length; i++) {
             playList.push(tracks.tracks.items[i].preview_url);
         }
         console.log(playList);
 
 
         //  while (playList_Index < playList.length) {
-            audioElement.setAttribute('src', playList[playList_Index]);
-            // audioElement.setAttribute('id', "track-" + playList_Index);
+        audioElement.setAttribute('src', playList[playList_Index]);
+        // audioElement.setAttribute('id', "track-" + playList_Index);
+        audioElement.play();
+
+        if (playList_Index < playList.length) {
+            audioElement.load();
             audioElement.play();
+            audioElement.addEventListener('ended', function () {
+                playList_Index++;
+                playMusic(tracks);
+            })
+        }
 
-            if (playList_Index < playList.length) {
-                audioElement.load();
-                audioElement.play();
-                audioElement.addEventListener('ended', function() {
-                    playList_Index++;
-                    playMusic(tracks);
-                })
-            }
 
-            
 
     }
     getArtist(artist, playMusic);
-   
+
     //       //
     // Vimeo //
     //       //
@@ -125,10 +124,6 @@ $(document.body).on("click", '#submit', function (event) {
             console.log(response);
             $("#artistInfo").html(lastfmResults.bio.summary);
         });
-
-
-    
-
 })
 
 function capitalize() {
