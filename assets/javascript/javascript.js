@@ -188,15 +188,25 @@ ref.on("value", function (snapshot) {
         artistArr.push(artist);
         //console.log(artistArr);
         // return(artistArr);
-        var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
-        console.log(randomArtist);
+        //var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+        //console.log(randomArtist);
         // return(randomArtist);
     });
+    var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+    console.log(randomArtist);
+    console.log(artistArr)
+    for (var i = 0; i < artistArr.length; i++) {
+        var dbArtists = $("<div>");
+        dbArtists.text(artistArr[i]);
+        $("#artistsDiv").append(dbArtists);
+        
+    }
+
 });
 
 console.log(artistArr);
 
-$("#random").on("click", function(event) {
+$("#random").on("click", function (event) {
     event.preventDefault();
 
     randomArtist = artist;
