@@ -239,11 +239,8 @@ ref.on("value", function (snapshot) {
     }
 
     $("#musicArtistName").html(spart.join(' ') + ' ' + '<i class="far fa-play-circle" id="play"></i>');
-}
+})
 
-
-
-});
 
 console.log(artistArr);
 
