@@ -83,9 +83,7 @@ function getArtist(artist, cb) {
     }).then(cb).catch(() => generateSpotifyAccessToken(() => getArtist(artist, cb)));
 }
 
-
-$(document.body).on("click", '#submit', function (event) {
-    event.preventDefault();
+function setItOff() {
     var artist = $("#artistName").val().trim();
     capitalize();
 
@@ -177,6 +175,19 @@ $(document.body).on("click", '#submit', function (event) {
             $("#artistInfo").html(lastfmResults.bio.summary);
         });
 
+}
+
+$(document.body).keypress(function(event) {
+    if (event.which === 13) {
+        setItOff();
+        event.preventDefault();
+    }
+})
+
+
+$(document.body).on("click", '#submit', function (event) {
+   event.preventDefault();
+   setItOff();
 })
 
 //                   //
