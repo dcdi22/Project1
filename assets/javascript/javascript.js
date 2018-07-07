@@ -1,3 +1,4 @@
+var artistArr = [];
 var genres = [];
 var moods = [];
 var randomTracks = [];
@@ -49,7 +50,6 @@ function generateSpotifyAccessToken(cb) {
     }).catch(err => console.error(err));
 }
 
-
 //         //
 // Spotify //
 //         //
@@ -73,25 +73,32 @@ $(document.body).on("click", '#submit', function (event) {
     event.preventDefault();
     var artist = $("#artistName").val().trim();
     capitalize();
+
     var playList = [];
     var trackList = [];
     var playList_Index = 0;
-    
-   
- 
+    addToDataBase();
+
     //                       //
     // Spotify Function Call //
     //                       //
     function playMusic(tracks) {
-        console.log(tracks);
-        
-        
-        
-        for (var i=0; i < tracks.tracks.items.length; i++) {
-            playList.push(tracks.tracks.items[i].preview_url);
-            trackList.push(tracks.tracks.items[i].name);
+
+
+        var data = tracks.tracks.items.filter(track => track.preview_url);
+
+        console.log(data);
+        console.log(data[0].preview_url);
+
+
+
+        for (var i = 0; i < data.length; i++) {
+            playList.push(data[i].preview_url);
+          trackList.push(data[i].name);
+
         }
         console.log(playList);
+
 
 
         //  
@@ -111,7 +118,7 @@ $(document.body).on("click", '#submit', function (event) {
                 
             }
 
-            
+
 
     }
     getArtist(artist, playMusic);
@@ -156,4 +163,85 @@ $(document.body).on("click", '#submit', function (event) {
         });
 
 })
+
+//                   //
+// FireBase Maddness //
+//                   //
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCvvA5iRDT9MSKcez4MowbTU1-gb-fRArQ",
+    authDomain: "music-project-1-58914.firebaseapp.com",
+    databaseURL: "https://music-project-1-58914.firebaseio.com",
+    projectId: "music-project-1-58914",
+    storageBucket: "music-project-1-58914.appspot.com",
+    messagingSenderId: "1004850795390"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+function addToDataBase() {
+    $(document.body).on("click", "#addToDB", function (event) {
+        event.preventDefault();
+        console.log("YOU CLICKED MEEEEEEE");
+
+        // var artist = $('#artistName').val();
+        // var artists = snapshot.val();
+        // artists[artist] = true;
+        // database.ref('artists').set(artists);
+
+        var artistName = $('#artistName').val().toLowerCase();
+
+        database.ref("/artists").push({
+            artistName: artistName
+        });
+    })
+};
+
+var ref = firebase.database().ref("artists");
+
+ref.on("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+        var childData = childSnapshot.val();
+        var artist = childData.artistName;
+        //console.log(childData);
+        //console.log(artist);
+        artistArr.push(artist);
+        //console.log(artistArr);
+        // return(artistArr);
+        //var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+        //console.log(randomArtist);
+        // return(randomArtist);
+    });
+    var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+    console.log(randomArtist);
+    console.log(artistArr)
+    for (var i = 0; i < artistArr.length; i++) {
+        var dbArtists = $("<div>");
+        dbArtists.text(artistArr[i]);
+        $("#artistsDiv").append(dbArtists);
+    }
+
+});
+
+console.log(artistArr);
+
+$("#random").on("click", function (event) {
+    event.preventDefault();
+
+    randomArtist = artist;
+    //make an everything function????
+
+
+})
+
+// var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+// console.log(randomArtist);
+
+// var ref = new Firebase('https://music-project-1-58914.firebaseio.com');
+// var artistsRef = ref.child("artists");
+
+// var artistKey = artistsRef.key();
+// console.log(artistKey);
 
