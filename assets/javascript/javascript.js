@@ -1,5 +1,6 @@
 //#region variables
 var artistArr = [];
+
 var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b';
 var client_secret = '4702fa19b63940e7aefb634fa83392de';
 var genres = [];
@@ -54,6 +55,7 @@ $(document.body).on('click', '#addToDB', function (event) {
     event.preventDefault();
     // console.log('YOU CLICKED MEEEEEEE');
 
+
     // var artist = $('#artistName').val();
     // var artists = snapshot.val();
     // artists[artist] = true;
@@ -67,6 +69,7 @@ $(document.body).on('click', '#addToDB', function (event) {
         artistName: artistName
     });
 });
+
 
 $(document.body).on('click', '#play', function (event) {
     event.preventDefault;
@@ -154,6 +157,7 @@ function spotifyApiCall(tracks) {
     for (var i = 0; i < data.length; i++) {
         playList.push(data[i].preview_url);
         trackList.push(data[i].name);
+
     }
 
     audioElement.setAttribute('src', playList[playList_Index]);
@@ -189,6 +193,7 @@ function vimeoApiCall(artist) {
         // console.log(response.data.filter(e => e.categories.some(x => x.name === 'Music'))[0]);
 
         var vimeoResults = response.data;
+
         // console.log(vimeoResults[0].uri.match(/\d+/)[0]);
         // console.log($('#backVid'));
         $('#backVid').attr(
@@ -196,6 +201,7 @@ function vimeoApiCall(artist) {
             'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s'
         );
     });
+
 }
 //#endregion Vimeo
 
