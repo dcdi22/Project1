@@ -135,3 +135,19 @@ function capitalize() {
     }
     $("#musicArtistName").html(spart.join(' ') + ' ' + '<i class="far fa-play-circle" id="play"></i>');
 }
+
+// this is my array of genres
+
+// var genre = ["musical theatre", "rock", "pop", "hip hop", "jazz", "folk", "classical", "country",
+// "blues", "electronic dance", "rhythm and blues", "heavy metal", "reggae", "punk rock", "funk", 
+// "alternative rock", "disco", "techno", "soul", "house music","dance music", "rap", "opera", "instrumental",
+//  "indie rock", "dubstep", "ambient music", "trance music", "grunge", "industrial music", "new wave",
+//   "progrssiv rock", "hardcore punk", "orchestra", "gospel", "black metal", "vocal music", "dum and bass", 
+//   "electro", "pop rock", "bluegrass", "death metal", "ballad", "blues rock", "dub", "reggaeton"];
+
+
+   // this is my array for different moods
+    // var mood = ["amused", "blissful", "calm", "cheerful", "content", "dreamy", "ecstatic", "energetic", "excited", "flirty", "giddy", 
+    // "good", "happy", "joyful", "loving", "mellow", "optimistic", "peaceful", "silly", "sympathetic", "angry", "annoyed", "apathetic",
+    //  "bad", "cranky", "depressed", "envious", "frustrated", "gloomy", "grumpy", "guilty", "indifferent", "irritated", "melancholy", 
+    //  "pessimistic", "rejected", "restless", "sad", "stressed", "weird"];
