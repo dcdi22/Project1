@@ -155,25 +155,5 @@ $(document.body).on("click", '#submit', function (event) {
             $("#artistInfo").html(lastfmResults.bio.summary);
         });
 
-    var lastfmQueryURL2 = "http://ws.audioscrobbler.com/2.0/?method=user.getartisttracks&user=rj&artist=" + artist + "&api_key=" + lastfmAPIKey + "&format=json"
-
-    $.ajax({
-        url: lastfmQueryURL2,
-        method: "GET"
-    })
-    .then(function (response) {
-        var lastfmResults = response.artist;
-        console.log(response);
-        // $("#artistInfo").html(lastfmResults.bio.summary);
-    });
-
-
-
-
-
-
-
-
-
 })
 
