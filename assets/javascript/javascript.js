@@ -1,26 +1,25 @@
 var artistArr = [];
-var genres = [];
-var moods = [];
 var randomTracks = [];
 var spotify_access_token;
-var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b'
+var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b';
 var client_secret = '4702fa19b63940e7aefb634fa83392de';
+var audioElement = document.createElement("audio");
+
 // this is my array of genres
 
-// var genre = ["musical theatre", "rock", "pop", "hip hop", "jazz", "folk", "classical", "country",
-// "blues", "electronic dance", "rhythm and blues", "heavy metal", "reggae", "punk rock", "funk", 
-// "alternative rock", "disco", "techno", "soul", "house music","dance music", "rap", "opera", "instrumental",
-//  "indie rock", "dubstep", "ambient music", "trance music", "grunge", "industrial music", "new wave",
-//   "progrssiv rock", "hardcore punk", "orchestra", "gospel", "black metal", "vocal music", "dum and bass", 
-//   "electro", "pop rock", "bluegrass", "death metal", "ballad", "blues rock", "dub", "reggaeton"];
+var genre = ["musical theatre", "rock", "pop", "hip hop", "jazz", "folk", "classical", "country",
+"blues", "electronic dance", "rhythm and blues", "heavy metal", "reggae", "punk rock", "funk", 
+"alternative rock", "disco", "techno", "soul", "house music","dance music", "rap", "opera", "instrumental",
+"indie rock", "dubstep", "ambient music", "trance music", "grunge", "industrial music", "new wave",
+"progrssiv rock", "hardcore punk", "orchestra", "gospel", "black metal", "vocal music", "dum and bass", 
+"electro", "pop rock", "bluegrass", "death metal", "ballad", "blues rock", "dub", "reggaeton"];
 
 
-   // this is my array for different moods
-    // var mood = ["amused", "blissful", "calm", "cheerful", "content", "dreamy", "ecstatic", "energetic", "excited", "flirty", "giddy", 
-    // "good", "happy", "joyful", "loving", "mellow", "optimistic", "peaceful", "silly", "sympathetic", "angry", "annoyed", "apathetic",
-    //  "bad", "cranky", "depressed", "envious", "frustrated", "gloomy", "grumpy", "guilty", "indifferent", "irritated", "melancholy", 
-    //  "pessimistic", "rejected", "restless", "sad", "stressed", "weird"];
-var audioElement = document.createElement("audio");
+// this is my array for different moods
+var mood = ["amused", "blissful", "calm", "cheerful", "content", "dreamy", "ecstatic", "energetic", "excited", "flirty", "giddy", 
+"good", "happy", "joyful", "loving", "mellow", "optimistic", "peaceful", "silly", "sympathetic", "angry", "annoyed", "apathetic",
+"bad", "cranky", "depressed", "envious", "frustrated", "gloomy", "grumpy", "guilty", "indifferent", "irritated", "melancholy", 
+"pessimistic", "rejected", "restless", "sad", "stressed", "weird"];
 
 
 function capitalize() {
@@ -68,6 +67,7 @@ function generateSpotifyAccessToken(cb) {
 //         //
 // Spotify //
 //         //
+
 function getArtist(artist, cb) {
     console.log(cb);
     $.ajax({
@@ -96,43 +96,27 @@ function setItOff() {
     // Spotify Function Call //
     //                       //
     function playMusic(tracks) {
-
-
         var data = tracks.tracks.items.filter(track => track.preview_url);
-
         console.log(data);
         console.log(data[0].preview_url);
-
-
-
         for (var i = 0; i < data.length; i++) {
             playList.push(data[i].preview_url);
-          trackList.push(data[i].name);
-
+            trackList.push(data[i].name);
         }
+       
         console.log(playList);
-
-
-
-        //  
-            audioElement.setAttribute('src', playList[playList_Index]);
-            
-                audioElement.play();
+        audioElement.setAttribute('src', playList[playList_Index]);
+        audioElement.play();
       
-            if (playList_Index < playList.length) {
-               
-                    audioElement.load();
-                    audioElement.play();
-                    $(".track-info").html("Now Playing: " + trackList[playList_Index]);
-                    audioElement.addEventListener('ended', function() {
-                        playList_Index++;
-                        playMusic(tracks);
-                    })
-                
-            }
-
-
-
+        if (playList_Index < playList.length) {    
+            audioElement.load();
+            audioElement.play();
+             $(".track-info").html("Now Playing: " + trackList[playList_Index]);
+            audioElement.addEventListener('ended', function() {
+                playList_Index++;
+                playMusic(tracks);
+            })
+        }
     }
     getArtist(artist, playMusic);
 
@@ -174,7 +158,6 @@ function setItOff() {
             console.log(response);
             $("#artistInfo").html(lastfmResults.bio.summary);
         });
-
 }
 
 $(document.body).keypress(function(event) {
