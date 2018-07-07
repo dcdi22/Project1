@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,36 +13,85 @@
 </head>
 
 <body>
-    
+
+
     <div class="video-background">
         <div class="video-foreground">
             <iframe id="backVid" src="https://player.vimeo.com/video/24316886?autoplay=1&loop=1&muted=1#t=40s" frameborder="0" webkitallowfullscreen
                 mozallowfullscreen allowfullscreen allow="autoplay"></iframe>
         </div>
     </div>
+
+
     <div id="vidtop-content">
         <div class="vid-info">
-            <form>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="artistName" placeholder="artist name/band">
-                    <div class="input-group-append">
-                        <button class="btn btn-dark btn-outline-light" id="submit" type="button">Search</button>
-                        <button class="btn btn-dark btn-outline-light" id="random" type="button">Random</button>
-                    </div>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+                        aria-selected="true">Discover</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile"
+                        aria-selected="false">About</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact"
+                        aria-selected="false">Database</a>
                 </div>
-            </form>
-            <h1 id="musicArtistName"> Music Artist Name
-                <i class="far fa-play-circle" id="play"></i>
-            </h1>
-            <p id="artistInfo">Grab music artist info/bio</p>
+            </nav>
+
+
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active mt-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="artistName" placeholder="artist name/band">
+                            <div class="input-group-append">
+                                <button class="btn btn-dark btn-outline-light" id="submit" type="button">Search</button>
+                                <button class="btn btn-dark btn-outline-light" id="random" type="button">Random</button>
+                            </div>
+                        </div>
+                    </form>
+                    <h1 id="musicArtistName"> Music Artist Name
+                        <i class="far fa-play-circle" id="play"></i>
+                        <i class="fas fa-database" id="addToDB"></i>
+                    </h1>
+                    <p id="artistInfo">Grab music artist info/bio</p>
+
+                </div>
+
+
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+
+
+                <div class="tab-pane fade mt-3" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                    <h1>All Musicians In Our Database</h1>
+                    <div id="artistsDiv"></div>
+
+
+                </div>
+
+
+            </div>
+
         </div>
     </div>
+
+
+
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <script src="assets/javascript/javascript.js"></script>
+
 </body>
 
 </html>
