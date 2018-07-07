@@ -199,7 +199,6 @@ ref.on("value", function (snapshot) {
         var dbArtists = $("<div>");
         dbArtists.text(artistArr[i]);
         $("#artistsDiv").append(dbArtists);
-        
     }
 
 });
