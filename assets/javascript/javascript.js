@@ -123,6 +123,14 @@ $(document.body).on("click", '#submit', function (event) {
     var vimeoQueryURL = `https://api.vimeo.com/videos?query="${artist}"&access_token=${vimeoAccessToken}&per_page=1`;
     // Get rid of this if using catagories &page=1&per_page=15
 
+
+    //       //
+    // Vimeo //
+    //       //
+    var vimeoAccessToken = '275bb5cff8e3ae3639a860dd4c0976cf'
+    var vimeoQueryURL = `https://api.vimeo.com/videos?query="${artist}"&access_token=${vimeoAccessToken}&per_page=1`;
+    // Get rid of this if using catagories &page=1&per_page=15
+
     $.ajax({
         url: vimeoQueryURL,
         method: "GET"
