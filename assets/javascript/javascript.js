@@ -21,13 +21,6 @@
 //      console.log(genre[3]);
 //      console.log(genre[4]);
 
-        var length = genre.length
-        console.log(length)
-
-        for (var i=0; i<genre.length; i++) {
-            console.log(genre[i]);
-        }
-     
 
    
    
