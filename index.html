@@ -22,6 +22,10 @@
         </div>
     </div>
 
+    <div id="embed-player">
+        <iframe src="https://open.spotify.com/embed?uri=spotify:track:4VPpZXXeZHfpzvHNaPjLcF" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+
 
     <div id="vidtop-content">
         <div class="vid-info">
@@ -40,18 +44,18 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active mt-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                    <form>
+                    <form id="input-form">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="artistName" placeholder="artist name/band">
                             <div class="input-group-append">
-                                <button class="btn btn-dark btn-outline-light" id="submit" type="button">Search</button>
+                                <button class="btn btn-dark btn-outline-light" id="submit" type="submit">Search</button>
                                 <button class="btn btn-dark btn-outline-light" id="random" type="button">Random</button>
                             </div>
                         </div>
                     </form>
                     <h1 id="musicArtistName"> Music Artist Name
                         <i class="far fa-play-circle" id="play"></i>
-                        <i class="fas fa-database" id="addToDB"></i>
+                        <i class="far fa-plus-square" id="addToDB"></i>
                     </h1>
                     <p id="artistInfo">Grab music artist info/bio</p>
 
@@ -86,112 +90,108 @@
             GENRES
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-            <a class="dropdown-item" href="#">music</a>
-            <a class="dropdown-item" href="#">theatre</a>
-            <a class="dropdown-item" href="#">rock</a>
-            <a class="dropdown-item" href="#">pop</a>
-            <a class="dropdown-item" href="#">hip hop</a>
-            <a class="dropdown-item" href="#">jazz</a>
-            <a class="dropdown-item" href="#">folk</a>
-            <a class="dropdown-item" href="#">classical</a>
-            <a class="dropdown-item" href="#">country</a>
-            <a class="dropdown-item" href="#">blues</a>
-            <a class="dropdown-item" href="#">electronic</a>
-            <a class="dropdown-item" href="#">dance</a>
-            <a class="dropdown-item" href="#">rhythm and blues</a>
-            <a class="dropdown-item" href="#">heavy metal</a>
-            <a class="dropdown-item" href="#">reggae</a>
-            <a class="dropdown-item" href="#">punk rock</a>
-            <a class="dropdown-item" href="#">funk</a>
-            <a class="dropdown-item" href="#">alternative rock</a>
-            <a class="dropdown-item" href="#">disco</a>
-            <a class="dropdown-item" href="#">techno</a>
-            <a class="dropdown-item" href="#">soul</a>
-            <a class="dropdown-item" href="#">house music</a>
-            <a class="dropdown-item" href="#">dance music</a>
-            <a class="dropdown-item" href="#">rap</a>
-            <a class="dropdown-item" href="#">opera</a>
-            <a class="dropdown-item" href="#">instrumental</a>
-            <a class="dropdown-item" href="#">indie rock</a>
-            <a class="dropdown-item" href="#">dubstep</a>
-            <a class="dropdown-item" href="#">ambient music</a>
-            <a class="dropdown-item" href="#">trance music</a>
-            <a class="dropdown-item" href="#">grunge</a>
-            <a class="dropdown-item" href="#">industrial music</a>
-            <a class="dropdown-item" href="#">new wave</a>
-            <a class="dropdown-item" href="#">progrssiv rock</a>
-            <a class="dropdown-item" href="#">hardcore punk</a>
-            <a class="dropdown-item" href="#">orchestra</a>
-            <a class="dropdown-item" href="#">gospel</a>
-            <a class="dropdown-item" href="#">black metal</a>
-            <a class="dropdown-item" href="#">vocal music</a>
-            <a class="dropdown-item" href="#">dum and bass</a>
-            <a class="dropdown-item" href="#">electro</a>
-            <a class="dropdown-item" href="#">pop rock</a>
-            <a class="dropdown-item" href="#">bluegrass</a>
-            <a class="dropdown-item" href="#">death metal</a>
-            <a class="dropdown-item" href="#">ballad</a>
-            <a class="dropdown-item" href="#">blues rock</a>
-            <a class="dropdown-item" href="#">dub</a>
-            <a class="dropdown-item" href="#">reggaeton</a>
-  
-            
-            
+            <a class="dropdown" href="#">music</a>
+            <a class="dropdown" href="#">theatre</a>
+            <a class="dropdown" href="#">rock</a>
+            <a class="dropdown" href="#">pop</a>
+            <a class="dropdown" href="#">hip hop</a>
+            <a class="dropdown" href="#">jazz</a>
+            <a class="dropdown" href="#">folk</a>
+            <a class="dropdown" href="#">classical</a>
+            <a class="dropdown" href="#">country</a>
+            <a class="dropdown" href="#">blues</a>
+            <a class="dropdown" href="#">electronic</a>
+            <a class="dropdown" href="#">dance</a>
+            <a class="dropdown" href="#">rhythm and blues</a>
+            <a class="dropdown" href="#">heavy metal</a>
+            <a class="dropdown" href="#">reggae</a>
+            <a class="dropdown" href="#">punk rock</a>
+            <a class="dropdown" href="#">funk</a>
+            <a class="dropdown" href="#">alternative rock</a>
+            <a class="dropdown" href="#">disco</a>
+            <a class="dropdown" href="#">techno</a>
+            <a class="dropdown" href="#">soul</a>
+            <a class="dropdown" href="#">house music</a>
+            <a class="dropdown" href="#">dance music</a>
+            <a class="dropdown" href="#">rap</a>
+            <a class="dropdown" href="#">opera</a>
+            <a class="dropdown" href="#">instrumental</a>
+            <a class="dropdown" href="#">indie rock</a>
+            <a class="dropdown" href="#">dubstep</a>
+            <a class="dropdown" href="#">ambient music</a>
+            <a class="dropdown" href="#">trance music</a>
+            <a class="dropdown" href="#">grunge</a>
+            <a class="dropdown" href="#">industrial music</a>
+            <a class="dropdown" href="#">new wave</a>
+            <a class="dropdown" href="#">progrssiv rock</a>
+            <a class="dropdown" href="#">hardcore punk</a>
+            <a class="dropdown" href="#">orchestra</a>
+            <a class="dropdown" href="#">gospel</a>
+            <a class="dropdown" href="#">black metal</a>
+            <a class="dropdown" href="#">vocal music</a>
+            <a class="dropdown" href="#">dum and bass</a>
+            <a class="dropdown" href="#">electro</a>
+            <a class="dropdown" href="#">pop rock</a>
+            <a class="dropdown" href="#">bluegrass</a>
+            <a class="dropdown" href="#">death metal</a>
+            <a class="dropdown" href="#">ballad</a>
+            <a class="dropdown" href="#">blues rock</a>
+            <a class="dropdown" href="#">dub</a>
+            <a class="dropdown" href="#">reggaeton</a>
+   
           </div>
         </div>
 
         
-    <div class="d-flex">
-            <div class="dropdown mr-1">
-              <button  type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOff" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                Mood
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuOff">
-                <a class="dropdown-item" href="#">amused</a>
-                <a class="dropdown-item" href="#">blissful</a>
-                <a class="dropdown-item" href="#">calm</a>
-                <a class="dropdown-item" href="#">cheerful</a>
-                <a class="dropdown-item" href="#">content</a>
-                <a class="dropdown-item" href="#">dreamy</a>
-                <a class="dropdown-item" href="#">ecstatic</a>
-                <a class="dropdown-item" href="#">energetic</a>
-                <a class="dropdown-item" href="#">exited</a>
-                <a class="dropdown-item" href="#">flirty</a>
-                <a class="dropdown-item" href="#">giddy</a>
-                <a class="dropdown-item" href="#">good</a>
-                <a class="dropdown-item" href="#">happy</a>
-                <a class="dropdown-item" href="#">joyful</a>
-                <a class="dropdown-item" href="#">loving</a>
-                <a class="dropdown-item" href="#">mellow</a>
-                <a class="dropdown-item" href="#">optimistic</a>
-                <a class="dropdown-item" href="#">peaceful</a>
-                <a class="dropdown-item" href="#">silly</a>
-                <a class="dropdown-item" href="#">sympathetic</a>
-                <a class="dropdown-item" href="#">angry</a>
-                <a class="dropdown-item" href="#">annoyed</a>
-                <a class="dropdown-item" href="#">apathetic</a>
-                <a class="dropdown-item" href="#">bad</a>
-                <a class="dropdown-item" href="#">cranky</a>
-                <a class="dropdown-item" href="#">depressed</a>
-                <a class="dropdown-item" href="#">envious</a>
-                <a class="dropdown-item" href="#">frustrated</a>
-                <a class="dropdown-item" href="#">gloomy</a>
-                <a class="dropdown-item" href="#">grumpy</a>
-                <a class="dropdown-item" href="#">guilty</a>
-                <a class="dropdown-item" href="#">indifferent</a>
-                <a class="dropdown-item" href="#">irritated</a>
-                <a class="dropdown-item" href="#">melancholy</a>
-                <a class="dropdown-item" href="#">pessimistic</a>
-                <a class="dropdown-item" href="#">rejected</a>
-                <a class="dropdown-item" href="#">restless</a>
-                <a class="dropdown-item" href="#">sad</a>
-                <a class="dropdown-item" href="#">stressed</a>
-                <a class="dropdown-item" href="#">weird</a>
-               
-                
-              </div>
-            </div>
-        
+    <div class="flex">
+        <div class="dropdown mr">
+          <button  type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOff" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+            MOOD
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuOff">
+                <a class="dropdown" href="#">blissful</a>
+                <a class="dropdown" href="#">calm</a>
+                <a class="dropdown" href="#">cheerful</a>
+                <a class="dropdown" href="#">content</a>
+                <a class="dropdown" href="#">dreamy</a>
+                <a class="dropdown" href="#">ecstatic</a>
+                <a class="dropdown" href="#">energetic</a>
+                <a class="dropdown" href="#">exited</a>
+                <a class="dropdown" href="#">flirty</a>
+                <a class="dropdown" href="#">giddy</a>
+                <a class="dropdown" href="#">good</a>
+                <a class="dropdown" href="#">happy</a>
+                <a class="dropdown" href="#">joyful</a>
+                <a class="dropdown" href="#">loving</a>
+                <a class="dropdown" href="#">mellow</a>
+                <a class="dropdown" href="#">optimistic</a>
+                <a class="dropdown" href="#">peaceful</a>
+                <a class="dropdown" href="#">silly</a>
+                <a class="dropdown" href="#">sympathetic</a>
+                <a class="dropdown" href="#">angry</a>
+                <a class="dropdown" href="#">annoyed</a>
+                <a class="dropdown" href="#">apathetic</a>
+                <a class="dropdown" href="#">bad</a>
+                <a class="dropdown" href="#">cranky</a>
+                <a class="dropdown" href="#">depressed</a>
+                <a class="dropdown" href="#">envious</a>
+                <a class="dropdown" href="#">frustrated</a>
+                <a class="dropdown" href="#">gloomy</a>
+                <a class="dropdown" href="#">grumpy</a>
+                <a class="dropdown" href="#">guilty</a>
+                <a class="dropdown" href="#">indifferent</a>
+                <a class="dropdown" href="#">irritated</a>
+                <a class="dropdown" href="#">melancholy</a>
+                <a class="dropdown" href="#">pessimistic</a>
+                <a class="dropdown" href="#">rejected</a>
+                <a class="dropdown" href="#">restless</a>
+                <a class="dropdown" href="#">sad</a>
+                <a class="dropdown" href="#">stressed</a>
+                <a class="dropdown" href="#">weird</a>
+ 
+          </div>
+        </div>
+         
 
 
 
