@@ -9,7 +9,7 @@ var playList = [];
 var playList_Index = 0;
 var randomTracks = [];
 var spotify_access_token;
-var trackList = [];
+
 // this is my array of genres
 
 // var genre = ["musical theatre", "rock", "pop", "hip hop", "jazz", "folk", "classical", "country",
@@ -152,13 +152,21 @@ function getArtist(artist, cb) {
 }
 
 function spotifyApiCall(tracks) {
-    var data = tracks.tracks.items.filter(track => track.preview_url);
+    var data = tracks.tracks.items;
+    // console.log(data);
+    // console.log(data[playList_Index].uri);
 
     for (var i = 0; i < data.length; i++) {
         playList.push(data[i].preview_url);
         trackList.push(data[i].name);
-
     }
+
+    $('#ePlay').attr(
+        'src',
+        'https://open.spotify.com/embed?uri=' + data[playList_Index].uri
+    );
+
+    // console.log($('#ePlay').attr('src'));
 
     audioElement.setAttribute('src', playList[playList_Index]);
     audioElement.play();
@@ -166,7 +174,7 @@ function spotifyApiCall(tracks) {
     if (playList_Index < playList.length) {
         audioElement.load();
         audioElement.play();
-        $('.track-info').html('Now Playing: ' + trackList[playList_Index]);
+        // $('.track-info').html('Now Playing: ' + trackList[playList_Index]);
         audioElement.addEventListener('ended', function () {
             playList_Index++;
             spotifyApiCall(tracks);
@@ -194,12 +202,13 @@ function vimeoApiCall(artist) {
 
         var vimeoResults = response.data;
 
-        // console.log(vimeoResults[0].uri.match(/\d+/)[0]);
-        // console.log($('#backVid'));
+        console.log(vimeoResults[0].uri.match(/\d+/)[0]);
+        console.log($('#backVid'));
         $('#backVid').attr(
             'src',
             'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s'
         );
+        console.log($('#backVid').attr('src'));
     });
 
 }
