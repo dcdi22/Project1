@@ -1,5 +1,5 @@
 //#region variables
-var artistArr = [];
+// var artistArr = [];
 
 var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b';
 var client_secret = '4702fa19b63940e7aefb634fa83392de';
@@ -12,20 +12,56 @@ var spotify_access_token;
 var trackList = [];
 // this is my array of genres
 
-// var genre = ["musical theatre", "rock", "pop", "hip hop", "jazz", "folk", "classical", "country",
-// "blues", "electronic dance", "rhythm and blues", "heavy metal", "reggae", "punk rock", "funk",
-// "alternative rock", "disco", "techno", "soul", "house music","dance music", "rap", "opera", "instrumental",
-//  "indie rock", "dubstep", "ambient music", "trance music", "grunge", "industrial music", "new wave",
-//   "progrssiv rock", "hardcore punk", "orchestra", "gospel", "black metal", "vocal music", "dum and bass",
-//   "electro", "pop rock", "bluegrass", "death metal", "ballad", "blues rock", "dub", "reggaeton"];
+var genre = ["musical theatre", "rock", "pop", "hip hop", "jazz", "folk", "classical", "country",
+"blues", "electronic dance", "rhythm and blues", "heavy metal", "reggae", "punk rock", "funk",
+"alternative rock", "disco", "techno", "soul", "house music","dance music", "rap", "opera", "instrumental",
+ "indie rock", "dubstep", "ambient music", "trance music", "grunge", "industrial music", "new wave",
+  "progrssiv rock", "hardcore punk", "orchestra", "gospel", "black metal", "vocal music", "dum and bass",
+  "electro", "pop rock", "bluegrass", "death metal", "ballad", "blues rock", "dub", "reggaeton"];
+// console.log(genre[0]);
+// console.log(genre[1]);
+// console.log(genre[2]);
+// console.log(genre[3]);
+// console.log(genre[4]);
+// console.log(genre[5]);
+
+ var length = genre.length
+//  console.log(length);
+
+ 
+ for (var i=0; i<genre.length; i++) {
+//     console.log(genre[i]);
+//  }
+
 
 // this is my array for different moods
-// var mood = ["amused", "blissful", "calm", "cheerful", "content", "dreamy", "ecstatic", "energetic", "excited", "flirty", "giddy",
-// "good", "happy", "joyful", "loving", "mellow", "optimistic", "peaceful", "silly", "sympathetic", "angry", "annoyed", "apathetic",
-//  "bad", "cranky", "depressed", "envious", "frustrated", "gloomy", "grumpy", "guilty", "indifferent", "irritated", "melancholy",
-//  "pessimistic", "rejected", "restless", "sad", "stressed", "weird"];
 
-//#endregion variables
+
+
+ var mood = ["amused", "blissful", "calm", "cheerful", "content", "dreamy", "ecstatic", "energetic", "excited", "flirty", "giddy",
+"good", "happy", "joyful", "loving", "mellow", "optimistic", "peaceful", "silly", "sympathetic", "angry", "annoyed", "apathetic",
+ "bad", "cranky", "depressed", "envious", "frustrated", "gloomy", "grumpy", "guilty", "indifferent", "irritated", "melancholy",
+ "pessimistic", "rejected", "restless", "sad", "stressed", "weird"];
+//  console.log(mood[0]);
+//  console.log(mood[1]);
+//  console.log(mood[2]);
+//  console.log(mood[3]);
+//  console.log(mood[4]);
+//  console.log(mood[5]);
+
+ var length = mood.length
+//  console.log(length);
+
+ for (var i=0; i<mood.length; i++) {
+    //  console.log(mood[i]);
+     
+    }
+
+
+
+
+
+// //#endregion variables
 
 function capitalize() {
     var artistName = $('#artistName').val();
