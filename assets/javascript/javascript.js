@@ -1,14 +1,15 @@
 //#region variables
 var artistArr = [];
-
 var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b';
 var client_secret = '4702fa19b63940e7aefb634fa83392de';
 var genres = [];
 var moods = [];
+var trackList = [];
 var playList = [];
 var playList_Index = 0;
 var randomTracks = [];
 var spotify_access_token;
+var globalCounter = 0;
 
 // this is my array of genres
 
@@ -34,7 +35,7 @@ function capitalize() {
         var j = spart[i].charAt(0).toUpperCase();
         spart[i] = j + spart[i].substr(1);
     }
-    $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>');
+    $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + '<i class="fas fa-angle-double-right" id="skip"></i>');
 }
 
 var audioElement = document.createElement('audio');
@@ -46,6 +47,34 @@ function playPause() {
     } else if (audioElement.play) {
         $('#play').html("<i class='far fa-play-circle'></i>");
         audioElement.pause();
+    }
+}
+
+function nextTrack() {
+    if (audioElement.paused) {
+        $('#play').html("<i class='far fa-pause-circle'></i>");
+        playList_Index++;
+        audioElement.setAttribute('src', playList[playList_Index]);
+        $('#ePlay').attr(
+            'src',
+            'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
+        );
+        if (playList_Index < playList.length) {
+            audioElement.load();
+            audioElement.play();
+        }
+    } else if (audioElement.play) {
+        audioElement.pause();
+        playList_Index++;
+        audioElement.setAttribute('src', playList[playList_Index]);
+        $('#ePlay').attr(
+            'src',
+            'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
+        );
+        if (playList_Index < playList.length) {
+            audioElement.load();
+            audioElement.play();
+        }
     }
 }
 
@@ -76,6 +105,11 @@ $(document.body).on('click', '#play', function (event) {
     playPause();
 });
 
+$(document.body).on('click', '#skip', function (event) {
+    event.preventDefault;
+    nextTrack();
+})
+
 $('#random').on('click', function (event) {
     event.preventDefault();
 
@@ -88,7 +122,7 @@ $('#input-form').on('submit', function (event) {
     var artist = $('#artistName').val().trim();
 
     capitalize();
-
+    playList_Index = 0;
     getArtist(artist, spotifyApiCall);
     vimeoApiCall(artist);
     lastFmApiCall(artist);
@@ -153,28 +187,20 @@ function getArtist(artist, cb) {
 
 function spotifyApiCall(tracks) {
     var data = tracks.tracks.items;
-    // console.log(data);
-    // console.log(data[playList_Index].uri);
-
+    console.log(data);
     for (var i = 0; i < data.length; i++) {
         playList.push(data[i].preview_url);
-        trackList.push(data[i].name);
+        trackList.push(data[i].uri);
     }
-
     $('#ePlay').attr(
         'src',
-        'https://open.spotify.com/embed?uri=' + data[playList_Index].uri
+        'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
     );
-
-    // console.log($('#ePlay').attr('src'));
-
     audioElement.setAttribute('src', playList[playList_Index]);
     audioElement.play();
-
     if (playList_Index < playList.length) {
         audioElement.load();
         audioElement.play();
-        // $('.track-info').html('Now Playing: ' + trackList[playList_Index]);
         audioElement.addEventListener('ended', function () {
             playList_Index++;
             spotifyApiCall(tracks);
