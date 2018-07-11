@@ -189,7 +189,8 @@ function getArtist(artist, cb) {
 }
 
 function spotifyApiCall(tracks) {
-    var data = tracks.tracks.items;
+     var data = tracks.tracks.items;
+    //var data = tracks.tracks.items.filter(track => track.preview_url);
     globalCounter++;
     if (globalCounter === 1) {
         $("#myModal").modal();
@@ -285,7 +286,9 @@ ref.on('value', function (snapshot) {
         $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton);
         $('[data-toggle="tooltip"]').tooltip();
 
-
+        playList_Index = 0;
+        trackList = [];
+        playList = [];
         getArtist(artist, spotifyApiCall);
         vimeoApiCall(artist);
         lastFmApiCall(artist);
