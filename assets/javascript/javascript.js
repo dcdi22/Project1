@@ -1,17 +1,18 @@
 //#region variables
 var artistArr = [];
-
 var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b';
 var client_secret = '4702fa19b63940e7aefb634fa83392de';
 var genres = [];
 var moods = [];
+var trackList = [];
 var playList = [];
 var playList_Index = 0;
 var randomTracks = [];
 var spotify_access_token;
-var trackList = [];
+var globalCounter = 0;
 $("#mainContentContainer").hide();
 databaseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB"><i class="fas fa-plus"></i></button>';
+
 
 // this is my array of genres
 
@@ -53,6 +54,34 @@ function playPause() {
     }
 }
 
+function nextTrack() {
+    if (audioElement.paused) {
+        $('#play').html("<i class='far fa-pause-circle'></i>");
+        playList_Index++;
+        audioElement.setAttribute('src', playList[playList_Index]);
+        $('#ePlay').attr(
+            'src',
+            'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
+        );
+        if (playList_Index < playList.length) {
+            audioElement.load();
+            audioElement.play();
+        }
+    } else if (audioElement.play) {
+        audioElement.pause();
+        playList_Index++;
+        audioElement.setAttribute('src', playList[playList_Index]);
+        $('#ePlay').attr(
+            'src',
+            'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
+        );
+        if (playList_Index < playList.length) {
+            audioElement.load();
+            audioElement.play();
+        }
+    }
+}
+
 //#region Event Handlers
 
 $(document.body).on('click', '#addToDB', function (event) {
@@ -77,17 +106,11 @@ $(document.body).on('click', '#play', function (event) {
     playPause();
 });
 
-// $('#random').on('click', function (event) {
-//     event.preventDefault();
 
-//     artist = randomArtist;
-//     //make an everything function????
-//     capitalize();
-
-//     getArtist(artist, spotifyApiCall);
-//     vimeoApiCall(artist);
-//     lastFmApiCall(artist);
-// });
+$(document.body).on('click', '#skip', function (event) {
+    event.preventDefault;
+    nextTrack();
+})
 
 $('#input-form').on('submit', function (event) {
     event.preventDefault();
@@ -95,7 +118,9 @@ $('#input-form').on('submit', function (event) {
     var artist = $('#artistName').val().trim();
 
     capitalize();
-
+    playList_Index = 0;
+    trackList = [];
+    playList = [];
     getArtist(artist, spotifyApiCall);
     vimeoApiCall(artist);
     lastFmApiCall(artist);
@@ -115,7 +140,12 @@ function lastFmApiCall(artist) {
         }
     }).then(function (response) {
         var lastfmResults = response.artist;
-        // console.log(response);
+        console.log(response);
+        // if(lastfmResults.bio.summary.startsWith("Incorrect tag for ")) {
+        //     var newArtistMath1 = lastfmResults.bio.summary.length;
+        //     var newArtist = [];
+        //     for ()
+        // }
         $('#artistInfo').html(lastfmResults.bio.summary);
     });
 }
@@ -159,21 +189,24 @@ function getArtist(artist, cb) {
 }
 
 function spotifyApiCall(tracks) {
-    var data = tracks.tracks.items.filter(track => track.preview_url);
-
+    var data = tracks.tracks.items;
+    globalCounter++;
+    if (globalCounter === 1) {
+        $("#myModal").modal();
+    }
     for (var i = 0; i < data.length; i++) {
         playList.push(data[i].preview_url);
-        trackList.push(data[i].name);
-
+        trackList.push(data[i].uri);
     }
-
+    $('#ePlay').attr(
+        'src',
+        'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
+    );
     audioElement.setAttribute('src', playList[playList_Index]);
     audioElement.play();
-
     if (playList_Index < playList.length) {
         audioElement.load();
         audioElement.play();
-        $('.track-info').html('Now Playing: ' + trackList[playList_Index]);
         audioElement.addEventListener('ended', function () {
             playList_Index++;
             spotifyApiCall(tracks);
