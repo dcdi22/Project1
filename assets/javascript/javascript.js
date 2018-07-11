@@ -58,18 +58,17 @@ function playPause() {
 $(document.body).on('click', '#addToDB', function (event) {
     event.preventDefault();
     // console.log('YOU CLICKED MEEEEEEE');
-
-
-    // var artist = $('#artistName').val();
-    // var artists = snapshot.val();
-    // artists[artist] = true;
-    // database.ref('artists').set(artists);
-
     var artistName = $('#artistName').val().toLowerCase();
 
-    database.ref('/artists').push({
-        artistName: artistName
-    });
+    if (artistArr.includes(artistName)) {
+        //alert
+        $("#dbAlert").modal();
+        $(".dbAlertContent").text("Sorry, it seems" + " " + artistName + " " + "is already in our database");
+    } else {
+        database.ref('/artists').push({
+            artistName: artistName
+        });
+    }
 });
 
 
@@ -250,7 +249,7 @@ ref.on('value', function (snapshot) {
             var j = spart[i].charAt(0).toUpperCase();
             spart[i] = j + spart[i].substr(1);
         }
-        $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>'  + ' ' + databaseButton);
+        $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton);
         $('[data-toggle="tooltip"]').tooltip();
 
 
@@ -268,7 +267,7 @@ ref.on('value', function (snapshot) {
         dbArtists.text(artistArr[i]);
         $('#artistsDiv').append(dbArtists);
     }
-    
+
     // $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-play-circle" id="play"></i>');
 });
 //$('#artistsDiv').empty();
