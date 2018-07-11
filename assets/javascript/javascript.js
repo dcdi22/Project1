@@ -10,6 +10,9 @@ var playList_Index = 0;
 var randomTracks = [];
 var spotify_access_token;
 var trackList = [];
+$("#mainContentContainer").hide();
+databaseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB"><i class="fas fa-plus"></i></button>';
+
 // this is my array of genres
 
 // var genre = ["musical theatre", "rock", "pop", "hip hop", "jazz", "folk", "classical", "country",
@@ -34,7 +37,8 @@ function capitalize() {
         var j = spart[i].charAt(0).toUpperCase();
         spart[i] = j + spart[i].substr(1);
     }
-    $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>');
+    $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton);
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 var audioElement = document.createElement('audio');
@@ -54,20 +58,17 @@ function playPause() {
 $(document.body).on('click', '#addToDB', function (event) {
     event.preventDefault();
     // console.log('YOU CLICKED MEEEEEEE');
+    var artistName = $('#artistName').val().toLowerCase();
 
-
-    // var artist = $('#artistName').val();
-    // var artists = snapshot.val();
-    // artists[artist] = true;
-    // database.ref('artists').set(artists);
-
-    var artistName = $('#artistName')
-        .val()
-        .toLowerCase();
-
-    database.ref('/artists').push({
-        artistName: artistName
-    });
+    if (artistArr.includes(artistName)) {
+        //alert
+        $("#dbAlert").modal();
+        $(".dbAlertContent").text("Sorry, it seems" + " " + artistName + " " + "is already in our database");
+    } else {
+        database.ref('/artists').push({
+            artistName: artistName
+        });
+    }
 });
 
 
@@ -76,15 +77,21 @@ $(document.body).on('click', '#play', function (event) {
     playPause();
 });
 
-$('#random').on('click', function (event) {
-    event.preventDefault();
+// $('#random').on('click', function (event) {
+//     event.preventDefault();
 
-    randomArtist = artist;
-    //make an everything function????
-});
+//     artist = randomArtist;
+//     //make an everything function????
+//     capitalize();
+
+//     getArtist(artist, spotifyApiCall);
+//     vimeoApiCall(artist);
+//     lastFmApiCall(artist);
+// });
 
 $('#input-form').on('submit', function (event) {
     event.preventDefault();
+    $("#mainContentContainer").slideDown();
     var artist = $('#artistName').val().trim();
 
     capitalize();
@@ -177,30 +184,22 @@ function spotifyApiCall(tracks) {
 
 //#region Vimeo
 function vimeoApiCall(artist) {
-    $.ajax({
-        url: 'https://api.vimeo.com/videos',
-        method: 'GET',
-        data: {
-            query: artist,
-            access_token: '275bb5cff8e3ae3639a860dd4c0976cf',
-            // Get rid of this if using catagories &page=1&per_page=15
-            per_page: 1
-        }
-    }).then(function (response) {
-        // console.log(response);
+    var vimeoAccessToken = '275bb5cff8e3ae3639a860dd4c0976cf'
+    var vimeoQueryURL = `https://api.vimeo.com/videos?query="${artist}"&access_token=${vimeoAccessToken}&per_page=1`;
+    // Get rid of this if using catagories &page=1&per_page=15
 
-        // console.log(response.data.filter(e => e.categories.some(x => x.name === 'Music')));
-        // console.log(response.data.filter(e => e.categories.some(x => x.name === 'Music'))[0]);
+    $.ajax({
+        url: vimeoQueryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
 
         var vimeoResults = response.data;
+        console.log(vimeoResults[0].uri.match(/\d+/)[0]);
+        console.log($("#backVid"));
+        $("#backVid").attr("src", 'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s');
+    })
 
-        // console.log(vimeoResults[0].uri.match(/\d+/)[0]);
-        // console.log($('#backVid'));
-        $('#backVid').attr(
-            'src',
-            'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s'
-        );
-    });
 
 }
 //#endregion Vimeo
@@ -223,6 +222,7 @@ var database = firebase.database();
 var ref = firebase.database().ref('artists');
 
 ref.on('value', function (snapshot) {
+    artistArr = [];
     snapshot.forEach(function (childSnapshot) {
         var childData = childSnapshot.val();
         var artist = childData.artistName;
@@ -236,8 +236,32 @@ ref.on('value', function (snapshot) {
         // return(randomArtist);
     });
     var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
-    // console.log(randomArtist);
+    console.log(randomArtist);
+    $('#random').on('click', function (event) {
+        event.preventDefault();
+        $("#mainContentContainer").slideDown();
+
+        artist = randomArtist;
+        //make an everything function????
+        artistName = artist;
+        var spart = artistName.split(' ');
+        for (var i = 0; i < spart.length; i++) {
+            var j = spart[i].charAt(0).toUpperCase();
+            spart[i] = j + spart[i].substr(1);
+        }
+        $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton);
+        $('[data-toggle="tooltip"]').tooltip();
+
+
+        getArtist(artist, spotifyApiCall);
+        vimeoApiCall(artist);
+        lastFmApiCall(artist);
+        randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+    });
+    //return(randomArtist);
     // console.log(artistArr);
+    // $('#artistsDiv').empty();
+    $("#artistsDiv").empty();
     for (var i = 0; i < artistArr.length; i++) {
         var dbArtists = $('<div>');
         dbArtists.text(artistArr[i]);
@@ -246,5 +270,6 @@ ref.on('value', function (snapshot) {
 
     // $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-play-circle" id="play"></i>');
 });
-
+//$('#artistsDiv').empty();
+//console.log(randomArtist);
 //#endregion FireBase Maddness

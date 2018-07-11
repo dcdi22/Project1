@@ -27,7 +27,7 @@
     color: #fff;
 }
 
-#embed-player {
+/* #embed-player {
     position: absolute;
     top: 0;
     left: 0;
@@ -35,7 +35,7 @@
     color: #fff;
     padding: 1rem;
     font-family: Avenir, Helvetica, sans-serif;
-}
+} */
 
 .vid-info {
     position: absolute;
@@ -64,6 +64,12 @@
     border-bottom: none;
     margin: 1rem auto;
     text-align: center;
+}
+
+#addToDB {
+    vertical-align: top;
+    border: 3px solid white;
+    line-height: .9;
 }
 
 @media (min-aspect-ratio: 16/9) {
