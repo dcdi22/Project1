@@ -123,6 +123,8 @@ $('#input-form').on('submit', function (event) {
 
     capitalize();
     playList_Index = 0;
+    trackList = [];
+    playList = [];
     getArtist(artist, spotifyApiCall);
     vimeoApiCall(artist);
     lastFmApiCall(artist);
@@ -142,7 +144,12 @@ function lastFmApiCall(artist) {
         }
     }).then(function (response) {
         var lastfmResults = response.artist;
-        // console.log(response);
+        console.log(response);
+        // if(lastfmResults.bio.summary.startsWith("Incorrect tag for ")) {
+        //     var newArtistMath1 = lastfmResults.bio.summary.length;
+        //     var newArtist = [];
+        //     for ()
+        // }
         $('#artistInfo').html(lastfmResults.bio.summary);
     });
 }
@@ -187,7 +194,10 @@ function getArtist(artist, cb) {
 
 function spotifyApiCall(tracks) {
     var data = tracks.tracks.items;
-    console.log(data);
+    globalCounter++;
+    if (globalCounter === 1) {
+        $("#myModal").modal();
+    }
     for (var i = 0; i < data.length; i++) {
         playList.push(data[i].preview_url);
         trackList.push(data[i].uri);
