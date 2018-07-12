@@ -62,6 +62,32 @@
     line-height: .9;
 }
 
+.buttonsContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 1rem;
+    font-family: Avenir, Helvetica, sans-serif;
+}
+
+/* .icons {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+  
+  .icons:hover {
+      opacity: 0.7;
+  } */
+
+
+
 @media (min-aspect-ratio: 16/9) {
     .video-foreground {
         height: 300%;

@@ -1,18 +1,23 @@
 //#region variables
+
+var artist;
 var artistArr = [];
+var audioElement = document.createElement('audio');
 var client_id = 'cf8c0eb349a54b93b25dfb1eaabbf17b';
 var client_secret = '4702fa19b63940e7aefb634fa83392de';
+var databaseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB"><i class="fas fa-plus"></i></button>';
 var genres = [];
+var globalCounter = 0;
 var moods = [];
-var trackList = [];
 var playList = [];
 var playList_Index = 0;
 var randomTracks = [];
 var spotify_access_token;
-var globalCounter = 0;
-$("#mainContentContainer").hide();
-databaseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB"><i class="fas fa-plus"></i></button>';
+var trackList = [];
 
+//#endregion variables
+
+$('#mainContentContainer').hide();
 
 // this is my array of genres
 
@@ -29,8 +34,6 @@ databaseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title
 //  "bad", "cranky", "depressed", "envious", "frustrated", "gloomy", "grumpy", "guilty", "indifferent", "irritated", "melancholy",
 //  "pessimistic", "rejected", "restless", "sad", "stressed", "weird"];
 
-//#endregion variables
-
 function capitalize() {
     var artistName = $('#artistName').val();
     var spart = artistName.split(' ');
@@ -38,11 +41,11 @@ function capitalize() {
         var j = spart[i].charAt(0).toUpperCase();
         spart[i] = j + spart[i].substr(1);
     }
-    $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton);
+    $('#musicArtistName').html(
+        spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton
+    );
     $('[data-toggle="tooltip"]').tooltip();
 }
-
-var audioElement = document.createElement('audio');
 
 function playPause() {
     if (audioElement.paused) {
@@ -59,10 +62,7 @@ function nextTrack() {
         $('#play').html("<i class='far fa-pause-circle'></i>");
         playList_Index++;
         audioElement.setAttribute('src', playList[playList_Index]);
-        $('#ePlay').attr(
-            'src',
-            'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
-        );
+        $('#ePlay').attr('src', 'https://open.spotify.com/embed?uri=' + trackList[playList_Index]);
         if (playList_Index < playList.length) {
             audioElement.load();
             audioElement.play();
@@ -71,10 +71,7 @@ function nextTrack() {
         audioElement.pause();
         playList_Index++;
         audioElement.setAttribute('src', playList[playList_Index]);
-        $('#ePlay').attr(
-            'src',
-            'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
-        );
+        $('#ePlay').attr('src', 'https://open.spotify.com/embed?uri=' + trackList[playList_Index]);
         if (playList_Index < playList.length) {
             audioElement.load();
             audioElement.play();
@@ -84,15 +81,13 @@ function nextTrack() {
 
 //#region Event Handlers
 
-$(document.body).on('click', '#addToDB', function (event) {
+$(document.body).on('click', '#addToDB', function(event) {
     event.preventDefault();
-    // console.log('YOU CLICKED MEEEEEEE');
     var artistName = $('#artistName').val().toLowerCase();
 
     if (artistArr.includes(artistName)) {
-        //alert
-        $("#dbAlert").modal();
-        $(".dbAlertContent").text("Sorry, it seems" + " " + artistName + " " + "is already in our database");
+        $('#dbAlert').modal();
+        $('.dbAlertContent').text('Sorry, it seems' + ' ' + artistName + ' ' + 'is already in our database');
     } else {
         database.ref('/artists').push({
             artistName: artistName
@@ -100,27 +95,23 @@ $(document.body).on('click', '#addToDB', function (event) {
     }
 });
 
-
-$(document.body).on('click', '#play', function (event) {
+$(document.body).on('click', '#play', function(event) {
     event.preventDefault;
     playPause();
 });
 
-
-$(document.body).on('click', '#skip', function (event) {
+$(document.body).on('click', '#skip', function(event) {
     event.preventDefault;
     nextTrack();
-})
+});
 
-$('#input-form').on('submit', function (event) {
+$('#input-form').on('submit', function(event) {
     event.preventDefault();
-    $("#mainContentContainer").slideDown();
-    var artist = $('#artistName').val().trim();
+    $('#mainContentContainer').slideDown();
+    artist = $('#artistName').val().trim();
 
     capitalize();
     playList_Index = 0;
-    trackList = [];
-    playList = [];
     getArtist(artist, spotifyApiCall);
     vimeoApiCall(artist);
     lastFmApiCall(artist);
@@ -138,7 +129,7 @@ function lastFmApiCall(artist) {
             api_key: '628ffbed5ecc1259d740e1b19182a0bb',
             format: 'json'
         }
-    }).then(function (response) {
+    }).then(function(response) {
         var lastfmResults = response.artist;
         console.log(response);
         // if(lastfmResults.bio.summary.startsWith("Incorrect tag for ")) {
@@ -155,15 +146,15 @@ function lastFmApiCall(artist) {
 
 function generateSpotifyAccessToken(cb) {
     $.ajax({
-            url: 'https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/api/token',
-            method: 'POST',
-            data: {
-                grant_type: 'client_credentials'
-            },
-            headers: {
-                Authorization: 'Basic ' + btoa(client_id + ':' + client_secret)
-            }
-        })
+        url: 'https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/api/token',
+        method: 'POST',
+        data: {
+            grant_type: 'client_credentials'
+        },
+        headers: {
+            Authorization: 'Basic ' + btoa(client_id + ':' + client_secret)
+        }
+    })
         .then(res => {
             spotify_access_token = res.access_token;
             cb();
@@ -174,40 +165,39 @@ function generateSpotifyAccessToken(cb) {
 function getArtist(artist, cb) {
     // console.log(cb);
     $.ajax({
-            method: 'GET',
-            url: 'https://api.spotify.com/v1/search',
-            data: {
-                q: artist,
-                type: 'track'
-            },
-            headers: {
-                Authorization: 'Bearer ' + spotify_access_token
-            }
-        })
+        method: 'GET',
+        url: 'https://api.spotify.com/v1/search',
+        data: {
+            q: artist,
+            type: 'track'
+        },
+        headers: {
+            Authorization: 'Bearer ' + spotify_access_token
+        }
+    })
         .then(cb)
         .catch(() => generateSpotifyAccessToken(() => getArtist(artist, cb)));
 }
 
 function spotifyApiCall(tracks) {
-    var data = tracks.tracks.items;
+    trackList = [];
+    playList = [];
+    var data = tracks.tracks.items.filter(track => track.preview_url);
     globalCounter++;
     if (globalCounter === 1) {
-        $("#myModal").modal();
+        $('#myModal').modal();
     }
     for (var i = 0; i < data.length; i++) {
         playList.push(data[i].preview_url);
         trackList.push(data[i].uri);
     }
-    $('#ePlay').attr(
-        'src',
-        'https://open.spotify.com/embed?uri=' + trackList[playList_Index]
-    );
+    $('#ePlay').attr('src', 'https://open.spotify.com/embed?uri=' + trackList[playList_Index]);
     audioElement.setAttribute('src', playList[playList_Index]);
     audioElement.play();
     if (playList_Index < playList.length) {
         audioElement.load();
         audioElement.play();
-        audioElement.addEventListener('ended', function () {
+        audioElement.addEventListener('ended', function() {
             playList_Index++;
             spotifyApiCall(tracks);
         });
@@ -217,23 +207,24 @@ function spotifyApiCall(tracks) {
 
 //#region Vimeo
 function vimeoApiCall(artist) {
-    var vimeoAccessToken = '275bb5cff8e3ae3639a860dd4c0976cf'
+    var vimeoAccessToken = '275bb5cff8e3ae3639a860dd4c0976cf';
     var vimeoQueryURL = `https://api.vimeo.com/videos?query="${artist}"&access_token=${vimeoAccessToken}&per_page=1`;
     // Get rid of this if using catagories &page=1&per_page=15
 
     $.ajax({
         url: vimeoQueryURL,
-        method: "GET"
-    }).then(function (response) {
+        method: 'GET'
+    }).then(function(response) {
         console.log(response);
 
         var vimeoResults = response.data;
         console.log(vimeoResults[0].uri.match(/\d+/)[0]);
-        console.log($("#backVid"));
-        $("#backVid").attr("src", 'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s');
-    })
-
-
+        console.log($('#backVid'));
+        $('#backVid').attr(
+            'src',
+            'https://player.vimeo.com/video/' + vimeoResults[0].uri.match(/\d+/)[0] + '?autoplay=1&loop=1&muted=1#t=40s'
+        );
+    });
 }
 //#endregion Vimeo
 
@@ -254,9 +245,9 @@ var database = firebase.database();
 
 var ref = firebase.database().ref('artists');
 
-ref.on('value', function (snapshot) {
+ref.on('value', function(snapshot) {
     artistArr = [];
-    snapshot.forEach(function (childSnapshot) {
+    snapshot.forEach(function(childSnapshot) {
         var childData = childSnapshot.val();
         var artist = childData.artistName;
         // console.log(childData);
@@ -270,9 +261,9 @@ ref.on('value', function (snapshot) {
     });
     var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
     console.log(randomArtist);
-    $('#random').on('click', function (event) {
+    $('#random').on('click', function(event) {
         event.preventDefault();
-        $("#mainContentContainer").slideDown();
+        $('#mainContentContainer').slideDown();
 
         artist = randomArtist;
         //make an everything function????
@@ -282,10 +273,14 @@ ref.on('value', function (snapshot) {
             var j = spart[i].charAt(0).toUpperCase();
             spart[i] = j + spart[i].substr(1);
         }
-        $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton);
+        $('#musicArtistName').html(
+            spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + databaseButton
+        );
         $('[data-toggle="tooltip"]').tooltip();
 
-
+        playList_Index = 0;
+        trackList = [];
+        playList = [];
         getArtist(artist, spotifyApiCall);
         vimeoApiCall(artist);
         lastFmApiCall(artist);
@@ -294,7 +289,7 @@ ref.on('value', function (snapshot) {
     //return(randomArtist);
     // console.log(artistArr);
     // $('#artistsDiv').empty();
-    $("#artistsDiv").empty();
+    $('#artistsDiv').empty();
     for (var i = 0; i < artistArr.length; i++) {
         var dbArtists = $('<div>');
         dbArtists.text(artistArr[i]);
