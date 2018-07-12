@@ -1,3 +1,6 @@
+$( document ).ready(function() {
+    
+
 //#region variables
 
 var artist;
@@ -301,3 +304,4 @@ ref.on('value', function(snapshot) {
 //$('#artistsDiv').empty();
 //console.log(randomArtist);
 //#endregion FireBase Maddness
+});
