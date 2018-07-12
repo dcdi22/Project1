@@ -50,26 +50,48 @@
                         </div>
                     </form>
                     <div id="mainContentContainer">
-                    <div>
-                        <h1 id="musicArtistName"> Music Artist Name
-                            <i class="far fa-play-circle" id="play"></i>
-                            <button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB"><i class="fas fa-plus"></i></button>
-                        </h1>
-                    </div>
-                    <div>
-                        <div id="embed-player">
-                            <iframe id="ePlay" src="https://open.spotify.com/embed?uri=spotify:track:4VPpZXXeZHfpzvHNaPjLcF" width="300" height="80" frameborder="0"
-                                allowtransparency="true" allow="encrypted-media"></iframe>
+                        <div>
+                            <h1 id="musicArtistName"> Music Artist Name
+                                <i class="far fa-play-circle" id="play"></i>
+                                <button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </h1>
                         </div>
+                        <div>
+                            <div id="embed-player">
+                                <iframe id="ePlay" src="https://open.spotify.com/embed?uri=spotify:track:4VPpZXXeZHfpzvHNaPjLcF" width="300" height="80"
+                                    frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            </div>
+                        </div>
+                        <!-- <div>
+                            <a href="#" class=""><i class="fab fa-facebook-f icons"></i>
+
+                            </a>
+                        </div> -->
+
+                        <p id="artistInfo">Grab music artist info/bio</p>
+
                     </div>
-
-                    <p id="artistInfo">Grab music artist info/bio</p>
-                    
-                </div>
                 </div>
 
 
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <p class="mt-3">Music.Me is a music resource application that focuses on representation in the music industry, specifically
+                        providing a resource for those seeking out under-represented groups in media. We want Music.Me to
+                        help individuals find Musicians in which they see themselves.</p>
+
+                    <p>Our app allows users to search for musicians and find a sampling of their tracks AS WELL AS showcasing
+                        a directory focused on artists from marginalized groups pertaining to one or more of the following
+                        categories:
+                        <br>Persons of color
+                        <br>LGBT persons
+                        <br>& Women</p>
+
+                    <p>To help in the discovery process we've also included the 'random button' that will pull in an artist from
+                        the database and display information about them as well as begin playing a sampling of their music.
+                    </p>
+                </div>
 
 
                 <div class="tab-pane fade mt-3" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
@@ -90,36 +112,37 @@
     </div>
 
     <div class="container">
-       
+
         <!-- The Modal -->
         <div class="modal fade bd-example-modal-sm" id="myModal" abindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-            <div class="modal-content">
-            
-              <!-- Modal Header -->
-              <div class="modal-header modal-header-info py-0" style="border:none">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <!-- Modal body -->
-              <div class="modal-body">
-                If you want to listen to the current song in its entirety, pause it on the right, and play it on the left. To hear the next song, press the skip button.
-              <!-- Modal footer -->
-              <!-- <div class="modal-footer">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header modal-header-info py-0" style="border:none">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        If you want to listen to the current song in its entirety, pause it on the right, and play it on the left. To hear the next
+                        song, press the skip button.
+                        <!-- Modal footer -->
+                        <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div> -->
-              
+
+                    </div>
+                </div>
             </div>
-          </div>
+
         </div>
-        
-      </div>
 
 
-    <!-- <div class="d-flex">
+        <!-- <div class="d-flex">
         <div class="dropdown mr-1">
           <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
             GENRES
@@ -146,48 +169,161 @@
       </div> -->
 
 
-<!-- Modal -->
-      <div class="container">
-     
-        <!-- The Modal -->
-        <div class="modal fade bd-example-modal-sm" id="dbAlert" abindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-            <div class="modal-content">
-            
-              <!-- Modal Header -->
-              <div class="modal-header modal-header-info py-0">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <!-- Modal body -->
-              <div class="modal-body dbAlertContent">
-                
-              <!-- Modal footer -->
-              <!-- <div class="modal-footer">
+        <!-- Modal -->
+        <div class="container">
+
+            <!-- The Modal -->
+            <div class="modal fade bd-example-modal-sm" id="dbAlert" abindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header modal-header-info py-0">
+                            <h4 class="modal-title"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body dbAlertContent">
+
+                            <!-- Modal footer -->
+                            <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div> -->
-              
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
-        </div>
-        
-      </div>
+
+            <!-- Ruben Buttons -->
+            <div class="buttonsContainer">
+                <div class="d-flex">
+                    <div class="dropdown mr-1">
+                        <button type="button" class="btn btn-secondary dropdown-toggle btn-dark btn-outline-light" id="dropdownMenuOffset" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Genres
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            <a class="dropdown" href="#">musical theatre</a>
+                            <a class="dropdown" href="#">rock</a>
+                            <a class="dropdown" href="#">pop</a>
+                            <a class="dropdown" href="#">hip hop</a>
+                            <a class="dropdown" href="#">jazz</a>
+                            <a class="dropdown" href="#">folk</a>
+                            <a class="dropdown" href="#">classical</a>
+                            <a class="dropdown" href="#">country</a>
+                            <a class="dropdown" href="#">blues</a>
+                            <a class="dropdown" href="#">electronic dance</a>
+                            <a class="dropdown" href="#">rhythm and blues</a>
+                            <a class="dropdown" href="#">heavy metal</a>
+                            <a class="dropdown" href="#">reggae</a>
+                            <a class="dropdown" href="#">punk rock</a>
+                            <a class="dropdown" href="#">funk</a>
+                            <a class="dropdown" href="#">alternative rock</a>
+                            <a class="dropdown" href="#">disco</a>
+                            <a class="dropdown" href="#">techno</a>
+                            <a class="dropdown" href="#">soul</a>
+                            <a class="dropdown" href="#">house music</a>
+                            <a class="dropdown" href="#">dance music</a>
+                            <a class="dropdown" href="#">rap</a>
+                            <a class="dropdown" href="#">opera</a>
+                            <a class="dropdown" href="#">instrumental</a>
+                            <a class="dropdown" href="#">indie rock</a>
+                            <a class="dropdown" href="#">dubstep</a>
+                            <a class="dropdown" href="#">ambient music</a>
+                            <a class="dropdown" href="#">trance music</a>
+                            <a class="dropdown" href="#">grunge</a>
+                            <a class="dropdown" href="#">industrial music</a>
+                            <a class="dropdown" href="#">new wave</a>
+                            <a class="dropdown" href="#">progrssiv rock</a>
+                            <a class="dropdown" href="#">hardcore punk</a>
+                            <a class="dropdown" href="#">orchestra</a>
+                            <a class="dropdown" href="#">gospel</a>
+                            <a class="dropdown" href="#">black metal</a>
+                            <a class="dropdown" href="#">vocal music</a>
+                            <a class="dropdown" href="#">dum and bass</a>
+                            <a class="dropdown" href="#">electro</a>
+                            <a class="dropdown" href="#">pop rock</a>
+                            <a class="dropdown" href="#">bluegrass</a>
+                            <a class="dropdown" href="#">death metal</a>
+                            <a class="dropdown" href="#">ballad</a>
+                            <a class="dropdown" href="#">blues rock</a>
+                            <a class="dropdown" href="#">dub</a>
+                            <a class="dropdown" href="#">reggaeton</a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="dropdown mr-1">
+                            <button type="button" class="btn btn-secondary dropdown-toggle btn-dark btn-outline-light" id="dropdownMenuOffset" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                                Mood
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                <a class="dropdown" href="#">amused</a>
+                                <a class="dropdown" href="#">blissful</a>
+                                <a class="dropdown" href="#">calm</a>
+                                <a class="dropdown" href="#">cheerful</a>
+                                <a class="dropdown" href="#">content</a>
+                                <a class="dropdown" href="#">dreamy</a>
+                                <a class="dropdown" href="#">ecstatic</a>
+                                <a class="dropdown" href="#">energetic</a>
+                                <a class="dropdown" href="#">excited</a>
+                                <a class="dropdown" href="#">flirty</a>
+                                <a class="dropdown" href="#">giddy</a>
+                                <a class="dropdown" href="#">good</a>
+                                <a class="dropdown" href="#">happy</a>
+                                <a class="dropdown" href="#">joyfull</a>
+                                <a class="dropdown" href="#">loving</a>
+                                <a class="dropdown" href="#">mellow</a>
+                                <a class="dropdown" href="#">optimistic</a>
+                                <a class="dropdown" href="#">peaceful</a>
+                                <a class="dropdown" href="#">silly</a>
+                                <a class="dropdown" href="#">sympathetic</a>
+                                <a class="dropdown" href="#">angry</a>
+                                <a class="dropdown" href="#">annoyed</a>
+                                <a class="dropdown" href="#">apathetic</a>
+                                <a class="dropdown" href="#">bad</a>
+                                <a class="dropdown" href="#">cranky</a>
+                                <a class="dropdown" href="#">depressed</a>
+                                <a class="dropdown" href="#">envious</a>
+                                <a class="dropdown" href="#">frustrated</a>
+                                <a class="dropdown" href="#">gloomy</a>
+                                <a class="dropdown" href="#">grumpy</a>
+                                <a class="dropdown" href="#">guilty</a>
+                                <a class="dropdown" href="#">indifferent</a>
+                                <a class="dropdown" href="#">irritated</a>
+                                <a class="dropdown" href="#">melancholy</a>
+                                <a class="dropdown" href="#">pessimistic</a>
+                                <a class="dropdown" href="#">rejected</a>
+                                <a class="dropdown" href="#">restless</a>
+                                <a class="dropdown" href="#">sad</a>
+                                <a class="dropdown" href="#">stressed</a>
+                                <a class="dropdown" href="#">weied</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Ruben Buttons -->
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-    <script src="assets/javascript/javascript.js"></script>
+
+
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                        crossorigin="anonymous"></script>
+                    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9"
+                        crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                        crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+                        crossorigin="anonymous"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                        crossorigin="anonymous"></script>
+                    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+                    <script src="assets/javascript/javascript.js"></script>
 
 </body>
 
