@@ -20,8 +20,8 @@ var spotify_access_token;
 var globalCounter = 0;
 $("#mainContentContainer").hide();
 var databaseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB"><i class="fas fa-plus"></i></button>';
-var playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-pause-circle"></i></button>';
-var skipButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Skip to Next Track" data-toggle="tooltip" id="skip"<i class="fas fa-angle-double-right"></i></button>';
+// var playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-pause-circle"></i></button>';
+// var skipButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Skip to Next Track" data-toggle="tooltip" id="skip"<i class="fas fa-angle-double-right"></i></button>';
 
 // this is my array of genres
 
@@ -51,13 +51,11 @@ function capitalize() {
 
 function playPause() {
     if (audioElement.paused) {
-        // playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-pause-circle"></i></button>';
-        // $('[data-toggle="tooltip"]').tooltip();
+  
         $("#play").html("<i class='far fa-pause-circle' id='play'></i>");
         audioElement.play();
     } else if (audioElement.play) {
-        // playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-play-circle"></i></button>';
-        // $('[data-toggle="tooltip"]').tooltip();
+    
         $("#play").html("<i class='far fa-play-circle' id='pause'></i>");
         audioElement.pause();
     }
@@ -130,7 +128,7 @@ $('#input-form').on('submit', function(event) {
 //#region Last.FM
 function lastFmApiCall(artist) {
     $.ajax({
-        url: 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo',
+        url: 'https://cors-anywhere.herokuapp.com/http://ws.audioscrobbler.com/2.0/?method=artist.getinfo',
         method: 'GET',
         data: {
             artist: artist,
