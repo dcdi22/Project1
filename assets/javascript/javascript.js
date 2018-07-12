@@ -10,6 +10,10 @@ var playList_Index = 0;
 var randomTracks = [];
 var spotify_access_token;
 var globalCounter = 0;
+$("#mainContentContainer").hide();
+var databaseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Add Artist to Database" data-toggle="tooltip" id="addToDB"><i class="fas fa-plus"></i></button>';
+var playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-pause-circle"></i></button>';
+var skipButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Skip to Next Track" data-toggle="tooltip" id="skip"<i class="fas fa-angle-double-right"></i></button>';
 
 // this is my array of genres
 
@@ -35,17 +39,20 @@ function capitalize() {
         var j = spart[i].charAt(0).toUpperCase();
         spart[i] = j + spart[i].substr(1);
     }
-    $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + '<i class="fas fa-angle-double-right" id="skip"></i>');
+    $('#musicArtistName').html(spart.join(' ') + ' ' + playpauseButton + ' ' + skipButton + ' ' + databaseButton);
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 var audioElement = document.createElement('audio');
 
 function playPause() {
     if (audioElement.paused) {
-        $('#play').html("<i class='far fa-pause-circle'></i>");
+        playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-pause-circle"></i></button>';
+        $('[data-toggle="tooltip"]').tooltip();
         audioElement.play();
     } else if (audioElement.play) {
-        $('#play').html("<i class='far fa-play-circle'></i>");
+        playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-play-circle"></i></button>';
+        $('[data-toggle="tooltip"]').tooltip();
         audioElement.pause();
     }
 }
@@ -193,7 +200,7 @@ function getArtist(artist, cb) {
 }
 
 function spotifyApiCall(tracks) {
-    var data = tracks.tracks.items;
+    var data = tracks.tracks.items.filter(track => track.preview_url);;
     globalCounter++;
     if (globalCounter === 1) {
         $("#myModal").modal();
@@ -281,7 +288,29 @@ ref.on('value', function (snapshot) {
         // return(randomArtist);
     });
     var randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
-    // console.log(randomArtist);
+    console.log(randomArtist);
+    $('#random').on('click', function (event) {
+        event.preventDefault();
+        $("#mainContentContainer").slideDown();
+
+        artist = randomArtist;
+        //make an everything function????
+        artistName = artist;
+        var spart = artistName.split(' ');
+        for (var i = 0; i < spart.length; i++) {
+            var j = spart[i].charAt(0).toUpperCase();
+            spart[i] = j + spart[i].substr(1);
+        }
+        $('#musicArtistName').html(spart.join(' ') + ' ' + playpauseButton + ' ' + skipButton + ' ' + databaseButton);
+        $('[data-toggle="tooltip"]').tooltip();
+
+
+        getArtist(artist, spotifyApiCall);
+        vimeoApiCall(artist);
+        lastFmApiCall(artist);
+        randomArtist = artistArr[Math.floor(Math.random() * artistArr.length)];
+    });
+    //return(randomArtist);
     // console.log(artistArr);
     for (var i = 0; i < artistArr.length; i++) {
         var dbArtists = $('<div>');
