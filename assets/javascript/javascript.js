@@ -62,6 +62,7 @@ function nextTrack() {
     if (audioElement.paused) {
         $('#play').html("<i class='far fa-pause-circle'></i>");
         playList_Index++;
+        globalCounter++;
         audioElement.setAttribute('src', playList[playList_Index]);
         $('#ePlay').attr('src', 'https://open.spotify.com/embed?uri=' + trackList[playList_Index]);
         if (playList_Index < playList.length) {
@@ -71,6 +72,7 @@ function nextTrack() {
     } else if (audioElement.play) {
         audioElement.pause();
         playList_Index++;
+        globalCounter++;
         audioElement.setAttribute('src', playList[playList_Index]);
         $('#ePlay').attr('src', 'https://open.spotify.com/embed?uri=' + trackList[playList_Index]);
         if (playList_Index < playList.length) {
