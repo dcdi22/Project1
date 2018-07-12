@@ -1,3 +1,6 @@
+$( document ).ready(function() {
+    
+
 //#region variables
 
 var artist;
@@ -279,8 +282,8 @@ ref.on('value', function(snapshot) {
         $('[data-toggle="tooltip"]').tooltip();
 
         playList_Index = 0;
-        trackList = [];
-        playList = [];
+        // trackList = [];
+        // playList = [];
         getArtist(artist, spotifyApiCall);
         vimeoApiCall(artist);
         lastFmApiCall(artist);
@@ -293,7 +296,7 @@ ref.on('value', function(snapshot) {
     for (var i = 0; i < artistArr.length; i++) {
         var dbArtists = $('<div>');
         dbArtists.text(artistArr[i]);
-        $('#artistsDiv').append(dbArtists);
+        $('#artistsDiv').prepend(dbArtists);
     }
 
     // $('#musicArtistName').html(spart.join(' ') + ' ' + '<i class="far fa-play-circle" id="play"></i>');
@@ -301,3 +304,4 @@ ref.on('value', function(snapshot) {
 //$('#artistsDiv').empty();
 //console.log(randomArtist);
 //#endregion FireBase Maddness
+});
