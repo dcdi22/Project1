@@ -60,7 +60,7 @@
     text-align: center;
 }
 
-#addToDB {
+#addToDB, #play, #skip {
     vertical-align: top;
     border: 3px solid white;
     line-height: .9;
