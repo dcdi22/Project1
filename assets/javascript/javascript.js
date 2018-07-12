@@ -45,18 +45,20 @@ function capitalize() {
         var j = spart[i].charAt(0).toUpperCase();
         spart[i] = j + spart[i].substr(1);
     }
-    $('#musicArtistName').html(spart.join(' ') + ' ' + playpauseButton + ' ' + skipButton + ' ' + databaseButton);
+    $('#musicArtistName').html(spart.join(' ') + ' ' + databaseButton + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + '<i class="fas fa-angle-double-right" id="skip"></i>');
     $('[data-toggle="tooltip"]').tooltip();
 }
 
 function playPause() {
     if (audioElement.paused) {
-        playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-pause-circle"></i></button>';
-        $('[data-toggle="tooltip"]').tooltip();
+        // playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-pause-circle"></i></button>';
+        // $('[data-toggle="tooltip"]').tooltip();
+        $("#play").html("<i class='far fa-pause-circle' id='play'></i>");
         audioElement.play();
     } else if (audioElement.play) {
-        playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-play-circle"></i></button>';
-        $('[data-toggle="tooltip"]').tooltip();
+        // playpauseButton = '<button class="btn btn-dark btn-outline-light px-1 py-1" title="Play or Pause Track" data-toggle="tooltip" id="play"><i class="far fa-play-circle"></i></button>';
+        // $('[data-toggle="tooltip"]').tooltip();
+        $("#play").html("<i class='far fa-play-circle' id='pause'></i>");
         audioElement.pause();
     }
 }
@@ -279,7 +281,7 @@ ref.on('value', function(snapshot) {
             var j = spart[i].charAt(0).toUpperCase();
             spart[i] = j + spart[i].substr(1);
         }
-        $('#musicArtistName').html(spart.join(' ') + ' ' + playpauseButton + ' ' + skipButton + ' ' + databaseButton);
+        $('#musicArtistName').html(spart.join(' ') + ' ' + databaseButton + ' ' + '<i class="far fa-pause-circle" id="play"></i>' + ' ' + '<i class="fas fa-angle-double-right" id="skip"></i>');
         $('[data-toggle="tooltip"]').tooltip();
 
         playList_Index = 0;
